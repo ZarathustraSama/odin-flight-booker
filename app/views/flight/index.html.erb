@@ -1,0 +1,27 @@
+<h1>Flights</h1>
+
+<%= form_with model: @flight, method: :get do |form| %>
+  <%= form.label "Departure: "%>
+  <%= select_tag(:departure_id, options_for_select(@departing_options)) %>
+  <br /><br />
+  <%= form.label "Arrival: " %>
+  <%= select_tag(:arrival_id, options_for_select(@arrival_options)) %>
+  <br /><br />
+  <%= form.label "Passengers: " %>
+  <%= select_tag(:passengers, options_for_select([*1..4]) )%>
+  <br /><br />
+  <%= form.label "Date: " %>
+  <%= select_tag(:start_datetime, options_for_select(@datetime_options)) %>
+  <br /><br />
+  <%= form.submit "Search" %>
+<% end %>
+
+<% if @flights %>
+  <% @flights.each do |f| %>
+    <%= form_with model: @flight do |form| %><!--Action to Booking controller -->
+      
+    <% end %>
+  <% end %>
+<% else %>
+<p>No flight was found.</p>
+<% end %>
