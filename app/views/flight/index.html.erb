@@ -2,10 +2,10 @@
 
 <%= form_with model: @flight, method: :get do |form| %>
   <%= form.label "Departure: "%>
-  <%= select_tag(:departure_id, options_for_select(@departing_options)) %>
+  <%= select_tag(:departure_id, options_for_select(@airport_codes)) %>
   <br /><br />
   <%= form.label "Arrival: " %>
-  <%= select_tag(:arrival_id, options_for_select(@arrival_options)) %>
+  <%= select_tag(:arrival_id, options_for_select(@airport_codes)) %>
   <br /><br />
   <%= form.label "Passengers: " %>
   <%= select_tag(:passengers, options_for_select([*1..4]) )%>
