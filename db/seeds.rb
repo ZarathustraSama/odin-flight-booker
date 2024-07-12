@@ -8,6 +8,8 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+Flight.delete_all
+
 %w[AAL AES AAR YXX ABZ ABR ABJ ABI AUH ABV ACA SFO NYC].each do |code|
   Airport.find_or_create_by!(code:)
 end
@@ -15,24 +17,24 @@ end
 Flight.create!([{
                  departure_id: 1,
                  arrival_id: 2,
-                 start_datetime: '2024-09-11 09:00:00',
+                 date: '2024-09-11',
                  flight_duration: 130
                },
                 {
                   departure_id: 4,
                   arrival_id: 1,
-                  start_datetime: '2024-09-11 13:30:00',
+                  date: '2024-09-11',
                   flight_duration: 220
                 },
                 {
                   departure_id: 2,
                   arrival_id: 1,
-                  start_datetime: '2025-11-12 12:00:00',
+                  date: '2025-11-12',
                   flight_duration: 150
                 },
                 {
                   departure_id: 3,
                   arrival_id: 4,
-                  start_datetime: '2024-08-08 20:00:00',
+                  date: '2024-08-08',
                   flight_duration: 90
                 }])
