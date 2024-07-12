@@ -11,17 +11,24 @@
   <%= select_tag(:passengers, options_for_select([*1..4]) )%>
   <br /><br />
   <%= form.label "Date: " %>
-  <%= select_tag(:start_datetime, options_for_select(@datetime_options)) %>
+  <%= select_tag(:date, options_for_select(@date_options)) %>
   <br /><br />
   <%= form.submit "Search" %>
 <% end %>
 
 <% if @flights %>
-  <% @flights.each do |f| %>
-    <%= form_with model: @flight do |form| %><!--Action to Booking controller -->
-      
-    <% end %>
+  <br /><br />
+  <% if @flights.any? %>
+      <%= form_with model: @flight, method: :get do |form| %><!--Action to Booking controller -->
+        <% @flights.each do |f| %>
+          <div class="ticket">
+            <%= radio_button_tag '', f[:flight_id] %>
+            From: <%= f[:departure_code] %> -- To: <%= f[:arrival_code] %> -- Date: <%= f[:flight_date] %>
+          </div>
+        <% end %>
+        <%= hidden_field_tag @passengers %>
+      <% end %>
+  <% else %>
+    <p>No flight was found.</p>
   <% end %>
-<% else %>
-<p>No flight was found.</p>
 <% end %>
