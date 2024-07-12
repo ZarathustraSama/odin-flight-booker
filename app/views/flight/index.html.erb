@@ -27,6 +27,7 @@
           </div>
         <% end %>
         <%= hidden_field_tag @passengers %>
+        <%= form.submit 'Book Flight' %>
       <% end %>
   <% else %>
     <p>No flight was found.</p>
