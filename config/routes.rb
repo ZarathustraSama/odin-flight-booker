@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  get 'flight/index'
-  resources :flights, only: [:index]
+  get 'flights/', to: 'flight#index'
 
   root 'flight#index'
 end
