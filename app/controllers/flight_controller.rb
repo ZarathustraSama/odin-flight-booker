@@ -9,7 +9,14 @@ class FlightController < ApplicationController
                       params[:departure_id],
                       params[:arrival_id],
                       params[:date]]) || []
-    @flights = f.map { |flight| [flight.departure_airport, flight.arrival_airport, flight.date, flight.id] }
+    @flights = f.map do |flight|
+      {
+        departure_code: flight.departure_airport.code,
+        arrival_code: flight.arrival_airport.code,
+        flight_date: flight.date,
+        flight_id: flight.id
+      }
+    end
     @passengers = params[:passengers]
   end
 end
