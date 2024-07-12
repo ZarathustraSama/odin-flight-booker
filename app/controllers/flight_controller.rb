@@ -1,13 +1,15 @@
 class FlightController < ApplicationController
   def index
-    @flights = Flight.where(flight_params.except[:passengers])
+    @flight = Flight.new
     @airport_codes = Airport.all.map { |a| [a.code, a.id] }
-    @datetime_options = Flight.all.map { |f| [f.start_datetime.strftime('%d/%m/%y'), f.start_datetime.to_date] }.uniq
-  end
+    @date_options = Flight.all.map { |f| [f.date.strftime('%d/%m/%y'), f.date] }.uniq
+    return unless params[:commit]
 
-  private
-
-  def flight_params
-    params.permit(:departure_id, :arrival_id, :start_datetime, :passengers)
+    f = Flight.where(['departure_id = ? AND arrival_id = ? AND date = ?',
+                      params[:departure_id],
+                      params[:arrival_id],
+                      params[:date]]) || []
+    @flights = f.map { |flight| [flight.departure_airport, flight.arrival_airport, flight.date, flight.id] }
+    @passengers = params[:passengers]
   end
 end
