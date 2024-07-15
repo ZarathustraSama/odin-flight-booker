@@ -19,14 +19,14 @@
 <% if @flights %>
   <br /><br />
   <% if @flights.any? %>
-      <%= form_with model: @flight, url: 'booking#new', method: :get do |form| %>
+      <%= form_with model: @flight, url: 'booking/new', method: :get do |form| %>
         <% @flights.each do |f| %>
           <div class="ticket">
-            <%= radio_button_tag '', f[:flight_id] %>
+            <%= radio_button_tag 'flight_id', f[:flight_id] %>
             From: <%= f[:departure_code] %> -- To: <%= f[:arrival_code] %> -- Date: <%= f[:flight_date] %>
           </div>
         <% end %>
-        <%= hidden_field_tag @passengers %>
+        <%= hidden_field_tag 'passengers', @passengers %>
         <br /><br />
         <%= form.submit 'Book Flight' %>
       <% end %>
