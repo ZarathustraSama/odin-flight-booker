@@ -1,4 +1,4 @@
-class FlightController < ApplicationController
+class FlightsController < ApplicationController
   def index
     @flight = Flight.new
     @airport_codes = Airport.all.map { |a| [a.code, a.id] }
