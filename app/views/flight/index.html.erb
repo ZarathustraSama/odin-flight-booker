@@ -19,7 +19,7 @@
 <% if @flights %>
   <br /><br />
   <% if @flights.any? %>
-      <%= form_with model: @flight, url: 'booking#new' method: :get do |form| %>
+      <%= form_with model: @flight, url: 'booking#new', method: :get do |form| %>
         <% @flights.each do |f| %>
           <div class="ticket">
             <%= radio_button_tag '', f[:flight_id] %>
