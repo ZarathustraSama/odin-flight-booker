@@ -1,2 +1,19 @@
-<h1>Bookings#new</h1>
-<p>Find me in app/views/bookings/new.html.erb</p>
+<h1>New Booking</h1>
+
+<p>The flight is scheduled for <%= @flight.date %>, departing from <%= @flight.departure_airport.code %> to <%= @flight.arrival_airport.code %> </p>
+
+<br />
+
+<%= form_with model: @booking do |f| %>  
+  Passenger infos:
+  <br /><br />
+  <%= f.fields_for :passengers do |sub_f| %>
+    <%= sub_f.label 'Name: ' %>
+    <%= sub_f.text_field :name %>
+    <%= sub_f.label 'Email: ' %>
+    <%= sub_f.email_field :email %>
+    <br /><br /><br />
+  <% end %>
+  <%= f.hidden_field 'flight_id', value: @flight.id %>
+  <%= f.submit 'Confirm Booking' %>
+<% end %>
