@@ -9,13 +9,34 @@
 <%= form_with model: @booking do |f| %>  
   Passenger infos:
   <br /><br />
-  <%= f.fields_for :passengers do |sub_f| %>
-    <%= sub_f.label 'Name: ' %>
-    <%= sub_f.text_field :name %>
-    <%= sub_f.label 'Email: ' %>
-    <%= sub_f.email_field :email %>
-    <br /><br /><br />
-  <% end %>
+  <div data-controller="passenger">
+    <div data-passenger-target="passenger">
+      <%= f.fields_for :passengers do |sub_f| %>
+        <div class="passenger" data-controller="passenger" data-passenger-target="passenger">
+          <%= sub_f.label 'Name: ' %>
+          <%= sub_f.text_field :name %>
+          <%= sub_f.label 'Email: ' %>
+          <%= sub_f.email_field :email %>
+          <input type="button" value="Remove" data-action="click->passenger#remove">
+          <br /><br />
+        </div>
+      <% end %>
+      <template id="passenger-template">
+        <%= f.fields_for :passengers do |sub_f| %>
+          <div class="passenger"  data-controller="passenger" data-passenger-target="passenger">
+            <%= sub_f.label 'Name: ' %>
+            <%= sub_f.text_field :name %>
+            <%= sub_f.label 'Email: ' %>
+            <%= sub_f.email_field :email %>
+            <input type="button" value="Remove" data-action="click->passenger#remove">
+            <br /><br />
+          </div>
+        <% end %>
+      </template>
+    </div>
+    <input id="add-passenger" type="button" value="Add Passenger" data-action="click->passenger#add">
+  </div>
+  <br />
   <%= f.hidden_field 'flight_id', value: @flight.id %>
   <%= f.submit 'Confirm Booking' %>
 <% end %>

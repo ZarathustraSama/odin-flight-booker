@@ -69,3 +69,5 @@ end
 gem "ruby-lsp", "~> 0.17.4"
 
 gem "rubocop", "~> 1.64"
+
+gem "ruby", "~> 0.1.0"
